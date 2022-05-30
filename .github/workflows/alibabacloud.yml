@@ -19,5 +19,5 @@ jobs:
           SOURCE: ./
           REMOTE_HOST: 121.40.19.111
           REMOTE_USER: root
-          TARGET: /usr/share/nginx/html
+          TARGET: /usr/share/nginx/html/ezpic
           EXCLUDE:
