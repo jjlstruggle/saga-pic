@@ -1,0 +1,57 @@
+/* eslint valid-jsdoc: "off" */
+
+'use strict';
+
+/**
+ * @param {Egg.EggAppInfo} appInfo app info
+ */
+module.exports = appInfo => {
+  /**
+   * built-in config
+   * @type {Egg.EggAppConfig}
+   **/
+  const config = exports = {};
+
+  // use for cookie sign key, should change to your own and keep security
+  config.keys = appInfo.name + '_1653801870741_2625';
+
+  // add your middleware config here
+  config.middleware = [];
+
+  // add your user config here
+  const userConfig = {
+    // myAppName: 'egg',
+  };
+
+  config.proxy = true
+  config.security = {
+    csrf: { enable: false },
+    domainWhiteList: ['*']
+  }
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
+  }
+  config.multipart = {
+    whitelist: [
+      '.jpg', '.jpeg',
+      '.png',
+      '.gif',
+      '.bmp',
+      '.wbmp',
+      '.webp',
+      '.tif',
+      '.psd',
+    ],
+    mode: 'stream'
+  }
+  config.uploadDir = 'app/public/image';
+  config.pathMap = 'app/public/data'
+  config.static = {
+    prefix: '/cdn/'
+  }
+  return {
+    ...config,
+    ...userConfig,
+  };
+};
