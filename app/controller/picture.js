@@ -19,7 +19,7 @@ class UploadController extends Controller {
             await pump(stream, writeStream);
             let saveDir
             if (isProd) {
-                saveDir = 'http://121.40.19.111:7001/' + dir.saveDir.replace('/public/', '/cdn/')
+                saveDir = 'http://121.40.19.111:7001' + dir.saveDir.replace('/public/', '/cdn/')
             } else {
                 saveDir = 'http://127.0.0.1:7001' + dir.saveDir.replace('/public/', '/cdn/')
             }
