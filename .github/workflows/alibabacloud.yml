@@ -1,25 +1,23 @@
-# workflow name
-name: CI Backup First
-
-# master branch on push, auto run
+name: deploying Hexo project to GitHub pages
 on:
   push:
     branches:
       - master
 
 jobs:
-  Backup:
-    name: Backup To Private Project
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository master branch
+      - name: Checkout
         uses: actions/checkout@master
 
-      - name: Backup To Gitee Private Project
-        run: |
-          cd /usr/share/nginx/html
-          git clone git@github.com:jjlstruggle/saga-pic.git
-          cd saga-pic
-          npm install
-          npm start
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: -rltgoDzvO --delete
+          SOURCE: ./
+          REMOTE_HOST: 121.40.19.111
+          REMOTE_USER: root
+          TARGET: /usr/share/nginx/html
+          EXCLUDE:
