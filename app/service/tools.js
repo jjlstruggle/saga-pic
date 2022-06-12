@@ -6,8 +6,6 @@ const Mkdirp = require('mz-modules/mkdirp');
 const fs = require('fs')
 const { promisify } = require('util')
 
-const readFile = promisify(fs.readFile)
-const writeFile = promisify(fs.writeFile)
 const removeFile = promisify(fs.unlink)
 const readDir = promisify(fs.readdir)
 
@@ -16,24 +14,6 @@ class ToolService extends Service {
     async getTime() {
         let now = new Date();
         return now.getTime();
-    }
-
-    async getDb() {
-        let dir = this.config.pathMap + '/path.json'
-        const data = await readFile(dir, 'utf-8')
-        return JSON.parse(data)
-    }
-
-    async postDb(db) {
-        let dir = this.config.pathMap + '/path.json'
-        const data = JSON.stringify(db)
-        await writeFile(dir, data)
-    }
-
-    async addMapPath(id, path) {
-        const db = await this.getDb()
-        db.file.push({ id, path })
-        this.postDb(db)
     }
 
     async removeImage($path) {
@@ -45,13 +25,6 @@ class ToolService extends Service {
 
         })
 
-    }
-
-    async deleteMapPath(_id) {
-        const db = await this.getDb()
-        let _path = db.file.filter(({ id }) => id !== _id)
-        db.file = _path
-        this.postDb(db)
     }
 
     async getUploadFile(filename) {

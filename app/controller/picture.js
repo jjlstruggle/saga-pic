@@ -24,7 +24,7 @@ class UploadController extends Controller {
                 saveDir = 'http://127.0.0.1:7001' + dir.saveDir.replace('/public/', '/cdn/')
             }
             let id = nanoid()
-            await this.service.tools.addMapPath(id, saveDir)
+            await this.service.sql.pictureMap(id, saveDir)
             part.push({ path: saveDir, id })
         }
 
@@ -35,26 +35,16 @@ class UploadController extends Controller {
         };
     }
 
-    async getMapData() {
-        const { ctx, service } = this;
-        const { file } = await service.tools.getDb()
-        ctx.body = {
-            code: 200,
-            data: file,
-            status: 'success'
-        };
-    }
-
     async deletePic() {
         const { ctx } = this;
         const _id = ctx.request.body.id
-        let { file } = await this.service.tools.getDb()
-        if (file.length) {
-            for (let i = 0; i < file.length; i++) {
-                const { id, path } = file[i]
+        const picmap = await this.service.sql.getPictureMap()
+        if (picmap.length) {
+            for (let i = 0; i < picmap.length; i++) {
+                const { id, path } = picmap[i]
                 if (id === _id) {
                     await this.service.tools.removeImage(path)
-                    await this.service.tools.deleteMapPath(_id)
+                    await this.service.sql.deleteMapPath(_id)
                 }
             }
         }
@@ -64,6 +54,17 @@ class UploadController extends Controller {
             status: 'success'
         };
     }
+
+    async getMapData() {
+        const { service, ctx } = this
+        const res = await service.sql.getPictureMap()
+        ctx.body = {
+            code: 200,
+            data: res,
+            status: 'success'
+        };
+    }
+
 
 }
 

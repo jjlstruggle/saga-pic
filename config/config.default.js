@@ -22,7 +22,7 @@ module.exports = appInfo => {
     app: true,
     agent: false,
   }
-  // use for cookie sign key, should change to your own and keep security
+
   config.keys = appInfo.name + '_1653801870741_2625';
 
   // add your middleware config here
@@ -60,6 +60,16 @@ module.exports = appInfo => {
   config.static = {
     prefix: '/cdn/'
   }
+  config.io = {
+    init: {},
+    namespace: {
+      '/': {
+        connectionMiddleware: [],
+        packetMiddleware: [],
+      },
+    }
+  }
+
   return {
     ...config,
     ...userConfig,
