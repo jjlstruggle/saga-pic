@@ -1,10 +1,15 @@
 'use strict';
 const Controller = require('egg').Controller;
 class detailedWordController extends Controller {
+
     async getDetailedWorkController() {
         const { ctx } = this
-        const { goods_id } = ctx.query
+        const { goods_id,user_id } = ctx.query
         const result = await ctx.service.detailedWorks.getDetailedWork(goods_id)
+        const isClick=await ctx.service.isClick.getIsClick(goods_id,user_id)
+        console.log(isClick);
+        result["isClick"]=isClick.isClick
+        console.log(result);
         ctx.status = 200;
         ctx.body = {
             code: 200,
@@ -12,12 +17,11 @@ class detailedWordController extends Controller {
             status: 'success'
         };
         ctx.status = 200;
-        return result
     }
     async goodsNumberAddController() {
         const ctx = this.ctx;
-        const { goods_id } = ctx.request.body
-        await ctx.service.detailedWorks.goodsNumberAdd(goods_id)
+        const { goods_id,myself_id} = ctx.request.body
+        await ctx.service.detailedWorks.goodsNumberAdd(goods_id,myself_id)
         ctx.body = {
             code: 200,
             status: 'success'
