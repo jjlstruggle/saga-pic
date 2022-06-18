@@ -36,7 +36,7 @@ class chartMessageServer extends Service {
             })
 
     }
-    async postReplyMessageServer(reply_id, coms_id, content, user_id, com_id) {
+    async postReplyMessageServer(reply_id, coms_id, content, user_id) {
         const { app } = this
         const { mysql } = app
         const { user_avatar, user_name } = await mysql.get('user', {
@@ -45,6 +45,7 @@ class chartMessageServer extends Service {
         const { user_name: reply_name } = await mysql.get('user', {
             user_id: reply_id
         })
+        const com_id = nanoid()
         const com_createTime = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
         await mysql.insert('comment',
             {
