@@ -32,9 +32,7 @@ class detailedWorkServer extends Service {
         const { coms_id } = await mysql.get('comments', {
             goods_id
         })
-        const { isClick } = await mysql.get('isClick', {
-            goods_id, user_id
-        })
+
 
         const result = {
             user_name,
@@ -44,7 +42,6 @@ class detailedWorkServer extends Service {
             goods_num,
             goods_createTime,
             coms_id,
-            isClick
         }
         return result
     }
