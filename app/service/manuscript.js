@@ -9,7 +9,7 @@ class manuscriptServer extends Service{
         const result=mysql.get('manuscript')
         return result
     }
-    async publishManuscript(user_id,manu_des,manu_price){
+    async publishManuscript(user_id,manu_desc,manu_price){
         const {app}=this
         const {mysql}=app
         const manu_id=nanoid()
@@ -18,7 +18,7 @@ class manuscriptServer extends Service{
             manu_id,
             in_id:null,
             out_id:user_id,
-            manu_des,
+            manu_desc,
             manu_price,
             manu_date:com_createTime
         })

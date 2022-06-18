@@ -6,14 +6,15 @@ class detailedWorkServer extends Service{
     async getDetailedWork(goods_id){
         const {app}=this
         const {mysql}=app
-        const {user_id,goods_picture,goods_prise,goods_num,goods_createTime}=mysql.get('goods',{
+        const {user_id,goods_picture,goods_prise,goods_num,goods_createTime}=await mysql.get('goods',{
             goods_id
         })
-        const {coms_id}=mysql.get('comments',{
+
+        const {coms_id}= mysql.get('comments',{
             goods_id
         })
         const {user_name,user_avatar}=mysql.get('user',{user_id})
-          return{
+        const result={
             user_name,
             user_avatar,
             goods_picture,
@@ -22,11 +23,12 @@ class detailedWorkServer extends Service{
             goods_createTime,
             coms_id
           }
+          return result
     }
     async goodsNumberAdd(goods_id){
         const {app}=this
         const {mysql}=app
-        const {coms_id,user_id,goods_tags,goods_picture,goods_prise,goods_num,goods_createTime,goods_desc}=mysql.get('goods',{
+        const {coms_id,user_id,goods_tags,goods_picture,goods_prise,goods_num,goods_createTime,goods_desc}=await mysql.get('goods',{
             goods_id
         })
         const row={
@@ -40,6 +42,7 @@ class detailedWorkServer extends Service{
             goods_createTime,
             goods_desc
         }
+
         const options = {
             where: {
                 goods_id
@@ -50,7 +53,7 @@ class detailedWorkServer extends Service{
     async goodsPriseAdd(goods_id){
         const {app}=this
         const {mysql}=app
-        const {coms_id,user_id,goods_tags,goods_picture,goods_prise,goods_num,goods_createTime,goods_desc}=mysql.get('goods',{
+        const {coms_id,user_id,goods_tags,goods_picture,goods_prise,goods_num,goods_createTime,goods_desc}=await mysql.get('goods',{
             goods_id
         })
         const row={
@@ -64,6 +67,7 @@ class detailedWorkServer extends Service{
             goods_createTime,
             goods_desc
         }
+        console.log(goods_prise);
         const options = {
             where: {
                 goods_id

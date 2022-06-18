@@ -4,12 +4,23 @@ class manuscriptController extends Controller{
  async getManuscript(){
     const ctx = this.ctx;
     const result=await ctx.service.manuscript.getManuscript()
+    ctx.body = {
+      code: 200,
+      data: result,
+      status: 'success'
+    };
+    ctx.status = 200;
     return result
  }
  async publishManuscript(){
     const ctx = this.ctx;
-    const {user_id,manu_des,manu_price}=ctx.body
-    await ctx.service.manuscript.publishManuscript(user_id,manu_des,manu_price)
+    const {user_id,manu_desc,manu_price}=ctx.request.body
+    await ctx.service.manuscript.publishManuscript(user_id,manu_desc,manu_price)
+    ctx.body = {
+      code: 200,
+      status: 'success'
+    };
+    ctx.status = 200;
  }
 }
 module.exports=manuscriptController
