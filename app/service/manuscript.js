@@ -6,7 +6,13 @@ class manuscriptServer extends Service {
     async getManuscript() {
         const { app } = this
         const { mysql } = app
-        const result = mysql.get('manuscript')
+        const result = await mysql.get('manuscript')
+        const user_id = result.out_id
+        const { user_avatar, user_name } = await mysql.get('user', {
+            user_id
+        })
+        result.user_avatar = user_avatar
+        result.user_name = user_name
         return result
     }
     async publishManuscript(user_id, manu_desc, manu_price, manu_title) {
@@ -25,9 +31,10 @@ class manuscriptServer extends Service {
             manu_price,
             manu_date: com_createTime,
             manu_title,
-            user_avatar,
-            user_name
         })
+        return {
+            user_avatar, user_name
+        }
     }
 }
 module.exports = manuscriptServer
