@@ -7,15 +7,15 @@ class manuscriptServer extends Service {
         const { app } = this
         const { mysql } = app
         const result = await mysql.select('manuscript')
-        result.forEach(res => {
+        return await Promise.all(result.map(async (res) => {
             const user_id = res.out_id
             const { user_avatar, user_name } = await mysql.get('user', {
                 user_id
             })
             res.user_avatar = user_avatar
             res.user_name = user_name
-        })
-        return result
+            return res
+        }))
     }
     async publishManuscript(user_id, manu_desc, manu_price, manu_title) {
         const { app } = this
