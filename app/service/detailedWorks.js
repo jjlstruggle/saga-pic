@@ -21,7 +21,6 @@ class detailedWorkServer extends Service {
         })
         return result
     }
-
     async getDetailedWork(goods_id) {
         const { app } = this
         const { mysql } = app
@@ -88,6 +87,8 @@ class detailedWorkServer extends Service {
                     goods_id, "user_id": myself_id
                 }
             });
+            let result = mysql.get('goods', { goods_id })
+            return result
         }
         else {
             await mysql.update('goods', row1, options);
@@ -96,6 +97,8 @@ class detailedWorkServer extends Service {
                     goods_id, "user_id": myself_id
                 }
             });
+            let result = mysql.get('goods', { goods_id })
+            return result
         }
     }
     async goodsPriseAdd(goods_id) {

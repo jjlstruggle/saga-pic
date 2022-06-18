@@ -7,7 +7,7 @@ class detailedWordController extends Controller {
         const { goods_id,user_id } = ctx.query
         await ctx.service.detailedWorks.createClick(goods_id,user_id)
         const result = await ctx.service.detailedWorks.getDetailedWork(goods_id)
-        const isClick=await ctx.service.isClick.getIsClick(goods_id,user_id)
+        const isClick=ctx.service.isClick.getIsClick(goods_id,user_id)
         console.log(isClick);
         result["isClick"]=isClick.isClick
         console.log(result);
@@ -22,9 +22,10 @@ class detailedWordController extends Controller {
     async goodsNumberAddController() {
         const ctx = this.ctx;
         const { goods_id,myself_id} = ctx.request.body
-        await ctx.service.detailedWorks.goodsNumberAdd(goods_id,myself_id)
+       let {goods_num}=await ctx.service.detailedWorks.goodsNumberAdd(goods_id,myself_id)
         ctx.body = {
             code: 200,
+            data:goods_num,
             status: 'success'
         };
     }
