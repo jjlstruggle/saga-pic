@@ -3,8 +3,8 @@ const Controller = require('egg').Controller;
 class chartMessageController extends Controller {
     async getChartMessage() {
         const ctx = this.ctx;
-        const { goods_id } = ctx.query;
-        const result = await ctx.service.chartMessage.getChartMessageServer(goods_id)
+        const { coms_id } = ctx.query;
+        const result = await ctx.service.chartMessage.getChartMessageServer(coms_id)
         console.log(result);
         ctx.body = {
             code: 200,
