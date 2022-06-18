@@ -32,7 +32,7 @@ class detailedWordController extends Controller {
     async goodsPriseAddController() {
         const ctx = this.ctx
         const { goods_id, myself_id } = ctx.request.body
-        await ctx.service.detailedWorks.goodsPriseAdd(goods_id,, myself_id)
+        await ctx.service.detailedWorks.goodsPriseAdd(goods_id, myself_id)
         ctx.body = {
             code: 200,
             status: 'success'
