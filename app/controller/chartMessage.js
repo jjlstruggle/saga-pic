@@ -17,8 +17,8 @@ class chartMessageController extends Controller {
     async postChartMessage() {
         const ctx = this.ctx;
         const row = ctx.request.body
-        const { goods_id, content } = row
-        await ctx.service.chartMessage.postChartMessageServer(goods_id, content)
+        const { goods_id, content, user_id } = row
+        await ctx.service.chartMessage.postChartMessageServer(goods_id, content, user_id)
         ctx.status = 200;
         ctx.body = {
             code: 200,

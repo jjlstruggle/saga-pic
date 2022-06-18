@@ -11,13 +11,10 @@ class chartMessageServer extends Service {
         })
         return result
     }
-    async postChartMessageServer(goodId, content) {
+    async postChartMessageServer(goodId, content, user_id) {
         const { app } = this
         const { mysql } = app
         const { coms_id } = mysql.get('comments', {
-            goods_id: goodId
-        })
-        const { user_id } = mysql.get('goods', {
             goods_id: goodId
         })
         const { user_avatar, user_name } = mysql.get('user', {
