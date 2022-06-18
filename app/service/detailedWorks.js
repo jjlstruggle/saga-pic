@@ -27,10 +27,13 @@ class detailedWorkServer extends Service {
         const { user_id, goods_picture, goods_prise, goods_num, goods_createTime } = await mysql.get('goods', {
             goods_id
         })
-        console.log("user_id", user_id);
+
         const { user_name, user_avatar } = await mysql.get('user', { user_id })
         const { coms_id } = await mysql.get('comments', {
             goods_id
+        })
+        const { isClick } = await mysql.get('isClick', {
+            goods_id, myself_id: user_id
         })
 
         const result = {
@@ -40,7 +43,8 @@ class detailedWorkServer extends Service {
             goods_prise,
             goods_num,
             goods_createTime,
-            coms_id
+            coms_id,
+            isClick
         }
         return result
     }
