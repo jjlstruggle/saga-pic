@@ -2,6 +2,17 @@
 const { nanoid } = require('nanoid')
 const Service = require('egg').Service;
 class detailedWorkServer extends Service {
+    async createClick(goods_id,user_id){
+        const { app } = this
+        const { mysql } = app
+       try{
+        mysql.insert('isClick',{
+            goods_id,user_id
+        })
+       }catch(e){
+        console.log(e);
+       }
+    }
     async getIsClick(goods_id,user_id){
         const { app } = this
         const { mysql } = app
