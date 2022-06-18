@@ -5,7 +5,6 @@ class detailedWordController extends Controller {
         const { ctx } = this
         const { goods_id } = ctx.query
         const result = await ctx.service.detailedWorks.getDetailedWork(goods_id)
-        console.log(result);
         ctx.status = 200;
         ctx.body = {
             code: 200,
