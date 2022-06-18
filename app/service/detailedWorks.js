@@ -21,7 +21,7 @@ class detailedWorkServer extends Service {
         })
         return result
     }
-    async
+
     async getDetailedWork(goods_id) {
         const { app } = this
         const { mysql } = app

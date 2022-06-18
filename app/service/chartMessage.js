@@ -32,7 +32,8 @@ class chartMessageServer extends Service {
                 com_createTime,
                 user_name,
                 reply_id: null,
-                reply_name: null
+                reply_name: null,
+                user_id
             })
 
     }
@@ -57,7 +58,8 @@ class chartMessageServer extends Service {
                 com_createTime,
                 user_name,
                 reply_id,
-                reply_name
+                reply_name,
+                user_id
             })
     }
 }

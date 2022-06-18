@@ -28,7 +28,7 @@ class chartMessageController extends Controller {
     async postReplyMessage() {
         const ctx = this.ctx;
         const row = ctx.request.body
-        const { reply_id, coms_id, content, user_id, com_id } = row
+        const { reply_id, coms_id, content, user_id } = row
         await ctx.service.chartMessage.postReplyMessageServer(reply_id, coms_id, content, user_id)
         ctx.status = 200;
         ctx.body = {
