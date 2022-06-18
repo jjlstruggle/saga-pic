@@ -13,7 +13,7 @@ class AuthController extends Controller{
     };
     }
     async getAuth(){
-        const ctx = this.ctx;
+    const ctx = this.ctx;
     const userId = ctx.params.id;
     const user = await ctx.service.auth.getAuth(userId)
     ctx.body = user;

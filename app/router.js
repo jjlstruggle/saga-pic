@@ -11,4 +11,12 @@ module.exports = app => {
   router.post('/removeImg', controller.picture.deletePic)
   router.get('/auth', controller.authentication.getAuth)
   router.post('/authMess', controller.authentication.authName)
+  router.get('./getChartMes',controller.chartMessage.getChartMessage)
+  router.post('./postChartMes',controller.chartMessage.postChartMessage)
+  router.post('./postReplyMes',controller.chartMessage.postReplyMessage)
+  router.get('./getDetailedWork',controller.detailedWorks.getDetailedWorkController)
+  router.post('./goodsNumberAdd',controller.detailedWorks.goodsNumberAddController)
+  router.post('./goodsPriseAdd',controller.detailedWorks.goodsPriseAddController)
+  router.get('./getManuscript',controller.manuscript.getManuscript)
+  router.post('./publishManuscript',controller.manuscript.publishManuscript)
 };
