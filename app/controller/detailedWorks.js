@@ -7,7 +7,7 @@ class detailedWordController extends Controller {
         const { goods_id, user_id } = ctx.query
         await ctx.service.detailedWorks.createClick(goods_id, user_id)
         const result = await ctx.service.detailedWorks.getDetailedWork(goods_id)
-        const isClick = ctx.service.isClick.getIsClick(goods_id, user_id)
+        const isClick = await ctx.service.isClick.getIsClick(goods_id, user_id)
         console.log(isClick);
         result["isClick"] = isClick.isClick
         console.log(result);
