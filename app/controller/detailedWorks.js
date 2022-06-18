@@ -2,8 +2,8 @@
 const Controller = require('egg').Controller;
 class detailedWordController extends Controller {
     async getDetailedWorkController() {
-        const ctx = this.ctx;
-        const { goods_id } = ctx.params;
+        const { ctx } = this
+        const { goods_id } = ctx.query
         const result = await ctx.service.detailedWorks.getDetailedWork(goods_id)
         console.log(result);
         ctx.status = 200;
