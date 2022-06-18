@@ -38,7 +38,7 @@ class chartMessageServer extends Service {
     async postReplyMessageServer(reply_id, coms_id, content, user_id, com_id) {
         const { app } = this
         const { mysql } = app
-        const { user_avatar, user_name } = mysql.get('user', {
+        const { user_avatar, user_name } = await mysql.get('user', {
             user_id
         })
         const com_createTime = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
