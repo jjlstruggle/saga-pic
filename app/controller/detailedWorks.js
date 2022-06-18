@@ -21,11 +21,10 @@ class detailedWordController extends Controller {
     }
     async goodsNumberAddController() {
         const ctx = this.ctx;
-        const { goods_id, myself_id } = ctx.request.body
-        let { goods_num } = await ctx.service.detailedWorks.goodsNumberAdd(goods_id, myself_id)
+        const { goods_id } = ctx.request.body
+        await ctx.service.detailedWorks.goodsNumberAdd(goods_id)
         ctx.body = {
             code: 200,
-            data: goods_num,
             status: 'success'
         };
     }
