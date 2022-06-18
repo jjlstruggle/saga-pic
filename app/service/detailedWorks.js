@@ -33,7 +33,7 @@ class detailedWorkServer extends Service {
             goods_id
         })
         const { isClick } = await mysql.get('isClick', {
-            goods_id, myself_id: user_id
+            goods_id, user_id
         })
 
         const result = {
