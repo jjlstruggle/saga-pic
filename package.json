@@ -33,8 +33,8 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-picture --ignore-stderr",
-    "stop": "egg-scripts stop --title=egg-server-picture",
+    "start": "egg-scripts start --daemon --title=egg-picture --ignore-stderr",
+    "stop": "egg-scripts stop --title=egg-picture",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
