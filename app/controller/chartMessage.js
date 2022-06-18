@@ -1,19 +1,24 @@
 'use strict';
 const Controller = require('egg').Controller;
 class chartMessageController extends Controller {
-    async getChartMessageController(){
+    async getChartMessage(){
         const ctx = this.ctx;
         const {goods_id} = ctx.params;
         const result=await ctx.service.chartMessage.getChartMessageServer(goods_id)
+        ctx.body = {
+            code: 200,
+            data: 'hello master',
+            status: 'success'
+          };
         return result
     }
-    async postChartMessageController(){
+    async postChartMessage(){
         const ctx = this.ctx;
         const row=ctx.request.body
         const {goods_id,content}=row
         await ctx.service.chartMessage.postChartMessageServer(goods_id,content)
     }
-    async postReplyMessageController(){
+    async postReplyMessage(){
         const ctx = this.ctx;
         const row=ctx.request.body
         const {reply_id,coms_id,content,user_id,com_id}=row
