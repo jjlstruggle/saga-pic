@@ -14,8 +14,8 @@ class manuscriptController extends Controller{
  }
  async publishManuscript(){
     const ctx = this.ctx;
-    const {user_id,manu_desc,manu_price}=ctx.request.body
-    await ctx.service.manuscript.publishManuscript(user_id,manu_desc,manu_price)
+    const {user_id,manu_desc,manu_price,manu_title}=ctx.request.body
+    await ctx.service.manuscript.publishManuscript(user_id,manu_desc,manu_price,manu_title)
     ctx.body = {
       code: 200,
       status: 'success'
