@@ -6,10 +6,12 @@ class detailedWorkServer extends Service {
         const { app } = this
         const { mysql } = app
        try{
+        console.log("this");
         mysql.insert('isClick',{
             goods_id,user_id
         })
        }catch(e){
+        console.log(222222222222);
         console.log(e);
        }
     }
@@ -85,12 +87,16 @@ class detailedWorkServer extends Service {
             await mysql.update('isClick', {goods_id,"user_id":myself_id,isClick:1}, {where:{
                 goods_id,"user_id":myself_id
             }});
+            let result= mysql.get('goods',{goods_id})
+            return result
         }
         else{
             await mysql.update('goods', row1, options);
             await mysql.update('isClick', {goods_id,"user_id":myself_id,isClick:0}, {where:{
                 goods_id,"user_id":myself_id
             }});
+            let result= mysql.get('goods',{goods_id})
+            return result
         }
     }
     async goodsPriseAdd(goods_id) {
