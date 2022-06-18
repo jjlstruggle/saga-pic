@@ -31,7 +31,8 @@ class chartMessageServer extends Service {
                 com_content: content,
                 com_createTime,
                 user_name,
-                reply_id: null
+                reply_id: null,
+                reply_name: null
             })
 
     }
@@ -40,6 +41,9 @@ class chartMessageServer extends Service {
         const { mysql } = app
         const { user_avatar, user_name } = await mysql.get('user', {
             user_id
+        })
+        const { user_name: reply_name } = await mysql.get('user', {
+            user_id: reply_id
         })
         const com_createTime = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
         await mysql.insert('comment',
@@ -51,7 +55,8 @@ class chartMessageServer extends Service {
                 com_content: content,
                 com_createTime,
                 user_name,
-                reply_id
+                reply_id,
+                reply_name
             })
     }
 }
