@@ -2,35 +2,37 @@
 const { nanoid } = require('nanoid')
 const Service = require('egg').Service;
 class detailedWorkServer extends Service {
-    async createClick(goods_id,user_id){
+    async createClick(goods_id, user_id) {
         const { app } = this
         const { mysql } = app
-       try{
-        console.log("this");
-        mysql.insert('isClick',{
-            goods_id,user_id
-        })
-       }catch(e){
-        console.log(222222222222);
-        console.log(e);
-       }
+
+        try {
+            await mysql.insert('isClick', {
+                goods_id, user_id
+            })
+        } catch (e) {
+            console.log(e);
+        }
+
     }
-    async getIsClick(goods_id,user_id){
+    async getIsClick(goods_id, user_id) {
         const { app } = this
         const { mysql } = app
-      let result =mysql.get('isClick',{
-        goods_id,user_id
+        let result = await mysql.get('isClick', {
+            goods_id, user_id
         })
         return result
     }
+
+
     async getDetailedWork(goods_id) {
         const { app } = this
         const { mysql } = app
         const { user_id, goods_picture, goods_prise, goods_num, goods_createTime } = await mysql.get('goods', {
             goods_id
         })
-        console.log("user_id",user_id);
-        const {user_name, user_avatar} =await mysql.get('user', {user_id}  )
+        console.log("user_id", user_id);
+        const { user_name, user_avatar } = await mysql.get('user', { user_id })
         const { coms_id } = await mysql.get('comments', {
             goods_id
         })
@@ -46,10 +48,10 @@ class detailedWorkServer extends Service {
         }
         return result
     }
-    async goodsNumberAdd(goods_id,myself_id) {
+    async goodsNumberAdd(goods_id, myself_id) {
         const { app } = this
         const { mysql } = app
-        const { coms_id, user_id, goods_tags, goods_picture, goods_prise, goods_num, goods_createTime, goods_desc } =await mysql.get('goods', {
+        const { coms_id, user_id, goods_tags, goods_picture, goods_prise, goods_num, goods_createTime, goods_desc } = await mysql.get('goods', {
             goods_id
         })
         const row = {
@@ -63,40 +65,43 @@ class detailedWorkServer extends Service {
             goods_createTime,
             goods_desc
         }
-       const row1={
-        user_id,
-        goods_id,
-        coms_id,
-        goods_tags,
-        goods_picture,
-        goods_prise,
-        goods_num: goods_num - 1,
-        goods_createTime,
-        goods_desc
-       }
+        const row1 = {
+            user_id,
+            goods_id,
+            coms_id,
+            goods_tags,
+            goods_picture,
+            goods_prise,
+            goods_num: goods_num - 1,
+            goods_createTime,
+            goods_desc
+        }
         const options = {
             where: {
                 goods_id
             }
         };
-        const {isClick}=await mysql.get('isClick',{
-            goods_id,"user_id":myself_id
-            })
-        if(isClick===0){
+        const { isClick } = await mysql.get('isClick', {
+            goods_id, "user_id": myself_id
+        })
+        if (isClick === 0) {
             await mysql.update('goods', row, options);
-            await mysql.update('isClick', {goods_id,"user_id":myself_id,isClick:1}, {where:{
-                goods_id,"user_id":myself_id
-            }});
-            let result= mysql.get('goods',{goods_id})
-            return result
+
+            await mysql.update('isClick', { goods_id, "user_id": myself_id, isClick: 1 }, {
+                where: {
+                    goods_id, "user_id": myself_id
+                }
+            });
+
         }
-        else{
+        else {
             await mysql.update('goods', row1, options);
-            await mysql.update('isClick', {goods_id,"user_id":myself_id,isClick:0}, {where:{
-                goods_id,"user_id":myself_id
-            }});
-            let result= mysql.get('goods',{goods_id})
-            return result
+            await mysql.update('isClick', { goods_id, "user_id": myself_id, isClick: 0 }, {
+                where: {
+                    goods_id, "user_id": myself_id
+                }
+            });
+
         }
     }
     async goodsPriseAdd(goods_id) {
