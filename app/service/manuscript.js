@@ -15,8 +15,6 @@ class manuscriptServer extends Service {
             res.user_avatar = user_avatar
             res.user_name = user_name
         })
-
-
         return result
     }
     async publishManuscript(user_id, manu_desc, manu_price, manu_title) {
