@@ -69,6 +69,7 @@ class detailedWorkServer extends Service {
         await mysql.update('goods', row, options);
 
     }
+
     async goodsPriseAdd(goods_id, myself_id) {
         const { app } = this
         const { mysql } = app
