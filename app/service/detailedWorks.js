@@ -94,7 +94,6 @@ class detailedWorkServer extends Service {
             goods_num,
             goods_createTime,
             goods_desc,
-            isClick: isClick === 0 ? 1 : 0
         }
         let row1 = {
             user_id,
@@ -106,7 +105,6 @@ class detailedWorkServer extends Service {
             goods_num,
             goods_createTime,
             goods_desc,
-            isClick: isClick === 0 ? 1 : 0
         }
 
 
