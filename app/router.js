@@ -19,4 +19,5 @@ module.exports = app => {
   router.post('/goodsPriseAdd',controller.detailedWorks.goodsPriseAddController)
   router.get('/getManuscript',controller.manuscript.getManuscript)
   router.post('/publishManuscript',controller.manuscript.publishManuscript)
+  router.post('/getClick',controller.isClick.getIsClick)
 };
