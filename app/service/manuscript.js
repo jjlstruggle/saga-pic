@@ -2,27 +2,32 @@
 const { nanoid } = require('nanoid')
 const sd = require('silly-datetime');
 const Service = require('egg').Service;
-class manuscriptServer extends Service{
-    async getManuscript(){
-        const {app}=this
-        const {mysql}=app
-        const result=mysql.get('manuscript')
+class manuscriptServer extends Service {
+    async getManuscript() {
+        const { app } = this
+        const { mysql } = app
+        const result = mysql.get('manuscript')
         return result
     }
-    async publishManuscript(user_id,manu_desc,manu_price,manu_title){
-        const {app}=this
-        const {mysql}=app
-        const manu_id=nanoid()
+    async publishManuscript(user_id, manu_desc, manu_price, manu_title) {
+        const { app } = this
+        const { mysql } = app
+        const manu_id = nanoid()
         const com_createTime = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
-        mysql.insert('manuscript',{
+        const { user_avatar, user_name } = await mysql.get('user', {
+            user_id
+        })
+        await mysql.insert('manuscript', {
             manu_id,
-            in_id:null,
-            out_id:user_id,
+            in_id: null,
+            out_id: user_id,
             manu_desc,
             manu_price,
-            manu_date:com_createTime,
-            manu_title
+            manu_date: com_createTime,
+            manu_title,
+            user_avatar,
+            user_name
         })
     }
 }
-module.exports=manuscriptServer
+module.exports = manuscriptServer
