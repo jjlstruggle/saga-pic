@@ -140,8 +140,9 @@ class detailedWorkServer extends Service {
             goods_createTime,
             goods_desc,
         }
-
-
+        const { isClick } = await mysql.get('isClick', {
+            user_id, goods_id
+        })
         if (isClick === 0) {
             await mysql.update('goods', row, options);
             await mysql.update('isClick', { goods_id, "user_id": myself_id, isClick: 1 }, {
