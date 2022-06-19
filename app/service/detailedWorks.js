@@ -7,7 +7,7 @@ class detailedWorkServer extends Service {
         const { mysql } = app
         try {
             await mysql.insert('isClick', {
-                goods_id, user_id
+                goods_id, user_id, isClick: 0
             })
         } catch (e) {
             console.log(e);
