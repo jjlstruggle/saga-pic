@@ -76,45 +76,11 @@ class detailedWorkServer extends Service {
     async goodsPriseAdd(goods_id, myself_id) {
         const { app } = this
         const { mysql } = app
-        const { coms_id, user_id, goods_tags, goods_picture, goods_prise, goods_num, goods_createTime, goods_desc } = await mysql.get('goods', {
-            goods_id
-        })
         const options = {
             where: {
                 goods_id
             }
         };
-        const { isClick } = await mysql.get('isClick', {
-            goods_id, "user_id": myself_id
-        })
-        if (isClick === 0) {
-            await mysql.update('goods', row, options);
-
-            await mysql.update('isClick', { goods_id, "user_id": myself_id, isClick: 1 }, {
-                where: {
-                    goods_id, "user_id": myself_id
-                }
-            });
-            let result = mysql.get('goods', { goods_id })
-            return result
-
-        }
-        else {
-            await mysql.update('goods', row1, options);
-
-            await mysql.update('isClick', { goods_id, "user_id": myself_id, isClick: 0 }, {
-                where: {
-                    goods_id, "user_id": myself_id
-                }
-            });
-            let result = mysql.get('goods', { goods_id })
-            return result
-
-        }
-    }
-    async goodsPriseAdd(goods_id) {
-        const { app } = this
-        const { mysql } = app
         const { coms_id, user_id, goods_tags, goods_picture, goods_prise, goods_num, goods_createTime, goods_desc } = await mysql.get('goods', {
             goods_id
         })
@@ -141,7 +107,7 @@ class detailedWorkServer extends Service {
             goods_desc,
         }
         const { isClick } = await mysql.get('isClick', {
-            user_id, goods_id
+            user_id: myself_id, goods_id
         })
         if (isClick === 0) {
             await mysql.update('goods', row, options);
