@@ -13,7 +13,6 @@ class detailedWorkServer extends Service {
         } catch (e) {
             console.log(e);
         }
-
     }
     async getIsClick(goods_id, user_id) {
         const { app } = this
@@ -87,20 +86,21 @@ class detailedWorkServer extends Service {
         if (isClick === 0) {
             await mysql.update('goods', row, options);
 
-            await mysql.update('isClick', { goods_id, "user_id": myself_id, isClick: 1 }, {
-                where: {
-                    goods_id, "user_id": myself_id
-                }
-            });
+            await mysql.update('isClick', {goods_id,"user_id":myself_id,isClick:1}, {where:{
+                goods_id,"user_id":myself_id
+            }});
+            let result= mysql.get('goods',{goods_id})
+            return result
 
         }
         else {
             await mysql.update('goods', row1, options);
-            await mysql.update('isClick', { goods_id, "user_id": myself_id, isClick: 0 }, {
-                where: {
-                    goods_id, "user_id": myself_id
-                }
-            });
+
+            await mysql.update('isClick', {goods_id,"user_id":myself_id,isClick:0}, {where:{
+                goods_id,"user_id":myself_id
+            }});
+            let result= mysql.get('goods',{goods_id})
+            return result
 
         }
     }
