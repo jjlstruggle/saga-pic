@@ -13,11 +13,15 @@ class AuthService extends Service {
         const { app } = this
         const { mysql } = app
         const row = {
-            user_id: user_id,
-            user_realName: user_realName,
-            user_idCard: user_idCard,
+            user_id,
+            user_realName,
+            user_idCard,
         };
-        const result = await mysql.update('authentication', row)
+        const result = await mysql.update('authentication', row, {
+            where: {
+                user_id,
+            }
+        })
         return result
     }
 }
