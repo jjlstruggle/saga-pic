@@ -4,7 +4,7 @@
  * @param {Egg.Application} app - egg application
  */
 module.exports = app => {
-  const { router, controller } = app;
+  const { router, controller,io } = app;
   router.get('/test', controller.home.index);
   router.post('/upload', controller.picture.upload);
   router.get('/imgDataSouce', controller.picture.getMapData);
@@ -20,4 +20,7 @@ module.exports = app => {
   router.get('/getManuscript',controller.manuscript.getManuscript)
   router.post('/publishManuscript',controller.manuscript.publishManuscript)
   router.post('/getClick',controller.isClick.getIsClick)
+  router.post('/sendMes',controller.chartRoom.postMes)
+  router.post('/getMes',controller.chartRoom.getAllMes)
+  io.of('/').route('chart',io.controller.chart.res)
 };
