@@ -16,11 +16,8 @@ class AuthService extends Service {
             user_id: user_id,
             user_realName: user_realName,
             user_idCard: user_idCard,
-            nameAuth: nameAuth
         };
         const result = await mysql.update('authentication', row)
-        const updateSuccess = result.affectedRows === 1;
-        console.log(updateSuccess);
         return result
     }
 }
