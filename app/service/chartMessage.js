@@ -7,7 +7,7 @@ class chartMessageServer extends Service {
         const { app } = this
         const { mysql } = app
         const result = mysql.select('comment', {
-            coms_id
+            where: { coms_id }
         })
         return result
     }
