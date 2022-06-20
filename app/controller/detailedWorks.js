@@ -37,5 +37,26 @@ class detailedWordController extends Controller {
             status: 'success'
         };
     }
+
+    async addCareList(user_id, target) {
+        const { ctx, service } = this
+        await service.detailedWorks.createCareList(user_id)
+        await service.detailedWorks.addCareList(user_id, target)
+        ctx.body = {
+            code: 200,
+            status: 'success'
+        };
+    }
+
+    async getCareList(user_id) {
+        const { ctx, service } = this
+        await service.detailedWorks.createCareList(user_id)
+        const res = await service.detailedWorks.getCareList(user_id)
+        ctx.body = {
+            code: 200,
+            status: 'success',
+            data: res
+        };
+    }
 }
 module.exports = detailedWordController

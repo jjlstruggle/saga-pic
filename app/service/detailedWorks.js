@@ -2,6 +2,37 @@
 const { nanoid } = require('nanoid')
 const Service = require('egg').Service;
 class detailedWorkServer extends Service {
+
+    async createCareList(user_id) {
+        const { app } = this
+        const { mysql } = app
+        try {
+            await mysql.insert('care', {
+                user_id, list: null
+            })
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async addCareList(user_id, target) {
+        const { app } = this
+        const { mysql } = app
+        const list = await mysql.get('care', { user_id })
+        if (!list) {
+            await mysql.update('care', { user_id, list: target }, { where: { user_id } })
+        } else {
+            await mysql.update('care', { user_id, list: list + "," + target }, { where: { user_id } })
+        }
+    }
+
+    async getCareList(user_id) {
+        const { app } = this
+        const { mysql } = app
+        const list = await mysql.get('care', { user_id })
+        return list.split(',')
+    }
+
     async createClick(goods_id, user_id) {
         const { app } = this
         const { mysql } = app
@@ -48,6 +79,8 @@ class detailedWorkServer extends Service {
         return result
     }
     async goodsNumberAdd(goods_id) {
+
+
         const { app } = this
         const { mysql } = app
         const options = {
