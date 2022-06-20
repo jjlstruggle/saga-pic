@@ -84,7 +84,7 @@ class detailedWorkServer extends Service {
             goods_prise,
             goods_num,
             goods_createTime,
-            coms_id,
+            coms_id, user_id
         }
         return result
     }
