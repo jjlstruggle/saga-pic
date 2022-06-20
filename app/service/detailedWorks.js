@@ -31,8 +31,16 @@ class detailedWorkServer extends Service {
         const { mysql } = app
         const list = await mysql.get('care', { user_id })
         let idArray = list.split(',')
-        const res = await mysql.select('care')
-        return res.filter(item => idArray.include(item.user_id))
+        const res = await mysql.select('user')
+        let u = []
+        res.forEach(item => {
+            if (idArray.includes(item.user_id)) {
+                let index = idArray.indexOf(item.user_id)
+                u.push({ user_id: item.user_id, user_name: item.user_name, user_avatar: item.user_avatar })
+                idArray.splice(index, 1)
+            }
+        })
+        return u
     }
 
     async createClick(goods_id, user_id) {
