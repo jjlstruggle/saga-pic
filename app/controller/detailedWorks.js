@@ -38,8 +38,9 @@ class detailedWordController extends Controller {
         };
     }
 
-    async addCareList(user_id, target) {
+    async addCareList() {
         const { ctx, service } = this
+        const { user_id, target } = ctx.request.body
         await service.detailedWorks.createCareList(user_id)
         await service.detailedWorks.addCareList(user_id, target)
         ctx.body = {
@@ -48,8 +49,9 @@ class detailedWordController extends Controller {
         };
     }
 
-    async getCareList(user_id) {
+    async getCareList() {
         const { ctx, service } = this
+        const { user_id } = ctx.request.query
         await service.detailedWorks.createCareList(user_id)
         const res = await service.detailedWorks.getCareList(user_id)
         ctx.body = {
