@@ -31,6 +31,9 @@ class detailedWorkServer extends Service {
         const { mysql } = app
         const { list } = await mysql.get('care', { user_id })
         let idArray = list.split(',')
+        if (!idArray.length) {
+            return []
+        }
         const res = await mysql.select('user')
         let u = []
         res.forEach(item => {
