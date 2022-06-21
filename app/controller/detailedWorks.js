@@ -61,7 +61,7 @@ class detailedWordController extends Controller {
         };
     }
 
-    async deleteCareList(user_id, target) {
+    async deleteCareList() {
         const { ctx, service } = this
         const { user_id, target } = ctx.request.body
         await service.detailedWorks.deleteCareList(user_id, target)
