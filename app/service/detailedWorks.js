@@ -30,8 +30,8 @@ class detailedWorkServer extends Service {
         const { mysql } = app
         const { list } = await mysql.get('care', { user_id })
         let idArray = list.split(',')
-        let newIdArray = idArray.filter(id => id !== target).join(',')
-        return newIdArray
+        let newIds = idArray.filter(id => id !== target).join(',')
+        await mysql.update('care', { user_id, list: newIds }, { where: { user_id } })
     }
 
     async getCare(user_id, target) {
