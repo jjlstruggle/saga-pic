@@ -29,7 +29,7 @@ class detailedWorkServer extends Service {
     async getCareList(user_id) {
         const { app } = this
         const { mysql } = app
-        const list = await mysql.get('care', { user_id })
+        const { list } = await mysql.get('care', { user_id })
         let idArray = list.split(',')
         const res = await mysql.select('user')
         let u = []
@@ -51,7 +51,6 @@ class detailedWorkServer extends Service {
                 goods_id, user_id, isClick: 0
             })
         } catch (e) {
-            console.log(e);
         }
     }
     async getIsClick(goods_id, user_id) {
