@@ -11,7 +11,6 @@ class detailedWorkServer extends Service {
                 user_id, list: null
             })
         } catch (e) {
-            console.log(e);
         }
     }
 
@@ -38,7 +37,7 @@ class detailedWorkServer extends Service {
     async getCare(user_id, target) {
         const { app } = this
         const { mysql } = app
-        const list = await mysql.get('care', { user_id })
+        const { list } = await mysql.get('care', { user_id })
         let idArray = list.split(',')
         return idArray.includes(target)
     }

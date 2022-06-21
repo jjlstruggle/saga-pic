@@ -23,7 +23,7 @@ module.exports = app => {
   router.post('/sendMes', controller.chartRoom.postMes)
   router.post('/getMes', controller.chartRoom.getAllMes)
   router.get('/getCareList', controller.detailedWorks.getCareList)
-  router.get('/getCare', controller.detailedWorks.getCareList)
+  router.get('/getCare', controller.detailedWorks.getCare)
   router.post('/addCareList', controller.detailedWorks.addCareList)
   router.post('/deleteCareList', controller.detailedWorks.deleteCareList)
 
