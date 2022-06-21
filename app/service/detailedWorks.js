@@ -35,6 +35,14 @@ class detailedWorkServer extends Service {
         return newIdArray
     }
 
+    async getCare(user_id, target) {
+        const { app } = this
+        const { mysql } = app
+        const list = await mysql.get('care', { user_id })
+        let idArray = list.split(',')
+        return idArray.includes(target)
+    }
+
     async getCareList(user_id) {
         const { app } = this
         const { mysql } = app

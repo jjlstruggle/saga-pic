@@ -49,6 +49,18 @@ class detailedWordController extends Controller {
         };
     }
 
+    async getCare() {
+        const { ctx, service } = this
+        const { user_id, target } = ctx.request.query
+        await service.detailedWorks.createCareList(user_id)
+        const res = await service.detailedWorks.getCare(user_id, target)
+        ctx.body = {
+            code: 200,
+            status: 'success',
+            data: res
+        };
+    }
+
     async getCareList() {
         const { ctx, service } = this
         const { user_id } = ctx.request.query
