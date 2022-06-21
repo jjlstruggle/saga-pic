@@ -17,7 +17,7 @@ class detailedWorkServer extends Service {
     async addCareList(user_id, target) {
         const { app } = this
         const { mysql } = app
-        const list = await mysql.get('care', { user_id })
+        const { list } = await mysql.get('care', { user_id })
         if (!list) {
             await mysql.update('care', { user_id, list: target }, { where: { user_id } })
         } else {
@@ -28,7 +28,7 @@ class detailedWorkServer extends Service {
     async deleteCareList(user_id, target) {
         const { app } = this
         const { mysql } = app
-        const list = await mysql.get('care', { user_id })
+        const { list } = await mysql.get('care', { user_id })
         let idArray = list.split(',')
         let newIdArray = idArray.filter(id => id !== target).join(',')
         return newIdArray
