@@ -24,5 +24,7 @@ module.exports = app => {
   router.post('/getMes', controller.chartRoom.getAllMes)
   router.get('/getCareList', controller.detailedWorks.getCareList)
   router.post('/addCareList', controller.detailedWorks.addCareList)
+  router.post('/deleteCareList', controller.detailedWorks.deleteCareList)
+
   io.of('/').route('chart', io.controller.chart.res)
 };
