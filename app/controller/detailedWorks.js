@@ -60,5 +60,15 @@ class detailedWordController extends Controller {
             data: res
         };
     }
+
+    async deleteCareList(user_id, target) {
+        const { ctx, service } = this
+        const { user_id, target } = ctx.request.body
+        await service.detailedWorks.deleteCareList(user_id, target)
+        ctx.body = {
+            code: 200,
+            status: 'success'
+        };
+    }
 }
 module.exports = detailedWordController

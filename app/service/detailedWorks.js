@@ -26,6 +26,15 @@ class detailedWorkServer extends Service {
         }
     }
 
+    async deleteCareList(user_id, target) {
+        const { app } = this
+        const { mysql } = app
+        const list = await mysql.get('care', { user_id })
+        let idArray = list.split(',')
+        let newIdArray = idArray.filter(id => id !== target).join(',')
+        return newIdArray
+    }
+
     async getCareList(user_id) {
         const { app } = this
         const { mysql } = app
