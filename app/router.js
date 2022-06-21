@@ -23,6 +23,6 @@ module.exports = app => {
   router.post('/sendMes', controller.chartRoom.postMes)
   router.post('/getMes', controller.chartRoom.getAllMes)
   router.get('/getCareList', controller.detailedWorks.getCareList)
-  router.post('addCareList', controller.detailedWorks.addCareList)
+  router.post('/addCareList', controller.detailedWorks.addCareList)
   io.of('/').route('chart', io.controller.chart.res)
 };
