@@ -3,11 +3,13 @@
 const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
-  async index() {
-    const { ctx } = this;
+  async getUserInfo() {
+    const { ctx, service } = this;
+    const user_id = ctx.request.query
+    const data = await service.home.getUserInfo(user_id)
     ctx.body = {
       code: 200,
-      data: 'hello master',
+      data: data,
       status: 'success'
     };
   }

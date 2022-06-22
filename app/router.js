@@ -5,7 +5,7 @@
  */
 module.exports = app => {
   const { router, controller, io } = app;
-  router.get('/test', controller.home.index);
+  router.get('/getUserInfo', controller.home.getUserInfo);
   router.post('/upload', controller.picture.upload);
   router.get('/imgDataSouce', controller.picture.getMapData);
   router.post('/removeImg', controller.picture.deletePic)
