@@ -38,6 +38,9 @@ class detailedWorkServer extends Service {
         const { app } = this
         const { mysql } = app
         const { list } = await mysql.get('care', { user_id })
+        if (list === null) {
+            return false
+        }
         let idArray = list.split(',')
         return idArray.includes(target)
     }
